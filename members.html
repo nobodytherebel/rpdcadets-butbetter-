@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Members — Richardson Police Public Safety Cadets Unit #761</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --navy: #1a2744; --navy-deep: #0f1a30; --navy-light: #253758;
+  --red: #c0392b; --red-dark: #962d22; --red-glow: #e74c3c;
+  --gold: #d4a952; --gold-light: #f0d68a;
+  --white: #ffffff; --text-muted: #8899b0;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Barlow', sans-serif; background: var(--navy-deep);
+  color: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; min-height: 100vh;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(15,26,48,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.06); transition: all 0.4s ease; }
+nav.scrolled { background: rgba(15,26,48,0.97); box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
+.nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.nav-brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--white); }
+.nav-brand img { width: 44px; height: 44px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.15); }
+.nav-brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+.nav-brand-dept { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); }
+.nav-brand-unit { font-family: 'Barlow Condensed', sans-serif; font-weight: 400; font-size: 13px; letter-spacing: 1px; color: var(--text-muted); }
+.nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+.nav-links a { text-decoration: none; color: rgba(255,255,255,0.7); font-family: 'Barlow Condensed', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase; padding: 8px 16px; border-radius: 6px; transition: all 0.3s ease; position: relative; }
+.nav-links a:hover, .nav-links a.active { color: var(--white); background: rgba(255,255,255,0.08); }
+.nav-links a.active::after { content: ''; position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); width: 16px; height: 2px; background: var(--red); border-radius: 2px; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
+.hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.3s ease; }
+.mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(15,26,48,0.98); backdrop-filter: blur(20px); padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.06); z-index: 999; }
+.mobile-menu.open { display: block; }
+.mobile-menu a { display: block; padding: 14px 0; color: rgba(255,255,255,0.7); text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 500; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.04); transition: color 0.3s ease; }
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--white); }
+
+/* LOCK SCREEN */
+.lock-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 72px 24px 40px; position: relative; }
+.lock-bg { position: fixed; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(26,39,68,0.95) 0%, rgba(15,26,48,1) 70%), radial-gradient(circle at 20% 80%, rgba(192,57,43,0.06) 0%, transparent 50%); z-index: 0; }
+.lock-bg::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 60px 60px; }
+.lock-card { position: relative; z-index: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 60px 48px; max-width: 440px; width: 100%; text-align: center; backdrop-filter: blur(10px); box-shadow: 0 30px 80px rgba(0,0,0,0.3); animation: cardIn 0.6s ease forwards; }
+@keyframes cardIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.lock-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--red), var(--gold), var(--red)); border-radius: 20px 20px 0 0; }
+.lock-icon { width: 72px; height: 72px; margin: 0 auto 28px; background: rgba(192,57,43,0.1); border: 1px solid rgba(192,57,43,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.lock-icon svg { color: var(--red); }
+.lock-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; margin-bottom: 8px; }
+.lock-subtitle { font-weight: 300; font-size: 14px; color: var(--text-muted); margin-bottom: 36px; line-height: 1.6; }
+.lock-input-group { position: relative; margin-bottom: 20px; }
+.lock-input { width: 100%; padding: 16px 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: var(--white); font-family: 'Barlow', sans-serif; font-size: 16px; letter-spacing: 4px; text-align: center; outline: none; transition: all 0.3s ease; }
+.lock-input::placeholder { letter-spacing: 1px; color: rgba(255,255,255,0.25); font-size: 14px; }
+.lock-input:focus { border-color: rgba(192,57,43,0.5); background: rgba(255,255,255,0.06); box-shadow: 0 0 20px rgba(192,57,43,0.1); }
+.lock-btn { width: 100%; padding: 16px; background: var(--red); color: var(--white); border: none; border-radius: 10px; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 2.5px; text-transform: uppercase; cursor: pointer; transition: all 0.35s ease; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 20px rgba(192,57,43,0.3); }
+.lock-btn:hover { background: var(--red-glow); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(192,57,43,0.4); }
+.lock-error { margin-top: 16px; font-size: 13px; color: var(--red-glow); opacity: 0; transition: opacity 0.3s ease; height: 20px; }
+.lock-error.show { opacity: 1; }
+.lock-home { margin-top: 32px; }
+.lock-home a { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 6px; }
+.lock-home a:hover { color: var(--white); }
+
+/* MEMBERS CONTENT */
+.members-content { display: none; padding: 120px 0 80px; min-height: 100vh; }
+.members-content.unlocked { display: block; animation: fadeIn 0.6s ease forwards; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.members-header { margin-bottom: 60px; }
+.section-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--red); }
+.section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 5vw, 48px); letter-spacing: 2px; line-height: 1; margin-bottom: 16px; }
+.section-desc { font-weight: 300; font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.5); max-width: 600px; }
+.required-note { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 13px; color: var(--gold); font-weight: 400; }
+.required-note .star { color: var(--gold); font-weight: 700; }
+
+/* DOC CATEGORIES */
+.doc-category { margin-bottom: 48px; }
+.doc-category-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.doc-category-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.doc-category-icon.red { background: rgba(192,57,43,0.12); border: 1px solid rgba(192,57,43,0.2); color: var(--red); }
+.doc-category-icon.gold { background: rgba(212,169,82,0.12); border: 1px solid rgba(212,169,82,0.2); color: var(--gold); }
+.doc-category-icon.blue { background: rgba(52,152,219,0.12); border: 1px solid rgba(52,152,219,0.2); color: #3498db; }
+.doc-category-icon.green { background: rgba(39,174,96,0.12); border: 1px solid rgba(39,174,96,0.2); color: #27ae60; }
+.doc-category-icon.purple { background: rgba(142,68,173,0.12); border: 1px solid rgba(142,68,173,0.2); color: #8e44ad; }
+.doc-category-icon.teal { background: rgba(22,160,133,0.12); border: 1px solid rgba(22,160,133,0.2); color: #16a085; }
+.doc-category-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1.5px; }
+.doc-category-count { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-left: auto; }
+
+/* DOC GRID */
+.doc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+.doc-card { display: flex; align-items: center; gap: 16px; padding: 18px 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; text-decoration: none; color: var(--white); transition: all 0.3s ease; cursor: pointer; }
+.doc-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(192,57,43,0.2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+.doc-card.required { border-left: 3px solid var(--gold); }
+.doc-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 12px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+.doc-icon.pdf { background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.25); color: #e74c3c; }
+.doc-icon.doc { background: rgba(52,152,219,0.15); border: 1px solid rgba(52,152,219,0.25); color: #3498db; }
+.doc-info { flex: 1; min-width: 0; }
+.doc-name { font-weight: 500; font-size: 15px; margin-bottom: 3px; display: flex; align-items: center; gap: 8px; }
+.doc-name .req-star { color: var(--gold); font-weight: 700; font-size: 14px; flex-shrink: 0; }
+.doc-meta { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+.doc-download { flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: var(--text-muted); transition: all 0.3s ease; }
+.doc-card:hover .doc-download { background: rgba(192,57,43,0.15); border-color: rgba(192,57,43,0.3); color: var(--white); }
+
+/* LOGOUT BAR */
+.logout-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(15,26,48,0.95); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.06); padding: 14px 24px; display: none; align-items: center; justify-content: center; gap: 16px; z-index: 100; }
+.logout-bar.show { display: flex; }
+.logout-status { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 1px; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+.logout-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #27ae60; }
+.logout-btn { padding: 8px 20px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: var(--text-muted); font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; }
+.logout-btn:hover { background: rgba(192,57,43,0.15); border-color: rgba(192,57,43,0.3); color: var(--white); }
+
+/* FOOTER */
+footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.05); padding: 40px 0; margin-bottom: 52px; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); letter-spacing: 0.5px; }
+.footer-back a { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s ease; }
+.footer-back a:hover { color: var(--white); }
+
+@media (max-width: 900px) { .nav-links { display: none; } .hamburger { display: flex; } .doc-grid { grid-template-columns: 1fr; } }
+@media (max-width: 500px) { .lock-card { padding: 48px 28px; } .footer-bottom { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<!-- LOCK SCREEN -->
+<div class="lock-screen" id="lockScreen">
+  <div class="lock-bg"></div>
+  <div class="lock-card">
+    <div class="lock-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+    <h2 class="lock-title">Members Only</h2>
+    <p class="lock-subtitle">This area contains private documents and general orders.<br>Enter your unit passcode to continue.</p>
+    <div class="lock-input-group">
+      <input type="password" class="lock-input" id="passcodeInput" placeholder="Enter passcode" autocomplete="off" autofocus>
+    </div>
+    <button class="lock-btn" id="unlockBtn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
+      Unlock
+    </button>
+    <div class="lock-error" id="lockError">Incorrect passcode. Please try again.</div>
+    <div class="lock-home">
+      <a href="index.html">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Return to Home
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- MEMBERS CONTENT -->
+<div class="members-content" id="membersContent">
+  <div class="container">
+    <div class="members-header">
+      <div class="section-label">Members Area</div>
+      <h1 class="section-title">Cadet Files</h1>
+      <p class="section-desc">Access unit documents, general orders, waivers, and training materials below. Click any document to download.</p>
+      <div class="required-note"><span class="star">*</span> Denotes required document for new Cadets</div>
+    </div>
+
+    <!-- Cadet G.O.s -->
+    <div class="doc-category">
+      <div class="doc-category-header">
+        <div class="doc-category-icon red"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <h3 class="doc-category-title">Cadet G.O.s</h3>
+        <span class="doc-category-count">6 Documents</span>
+      </div>
+      <div class="doc-grid">
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">Law Enforcement Cadet Program G.O. 1.00.41-98</div><div class="doc-meta"><span>General Order</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">Cadet Ride Along Program G.O. — Section 9</div><div class="doc-meta"><span>General Order</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">Cadet Guidebook</div><div class="doc-meta"><span>General Order</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">Cadet Awards Guide / Reference</div><div class="doc-meta"><span>General Order</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">Uniform Quick Reference</div><div class="doc-meta"><span>General Order</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon doc">DOC</div><div class="doc-info"><div class="doc-name">Blank Memo</div><div class="doc-meta"><span>Template</span> · <span>DOC</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+      </div>
+    </div>
+
+    <!-- Cadet Documents -->
+    <div class="doc-category">
+      <div class="doc-category-header">
+        <div class="doc-category-icon gold"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+        <h3 class="doc-category-title">Cadet Documents</h3>
+        <span class="doc-category-count">4 Documents</span>
+      </div>
+      <div class="doc-grid">
+        <a href="#" class="doc-card required" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name"><span class="req-star">*</span> New Cadet Application</div><div class="doc-meta"><span>Required</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card required" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name"><span class="req-star">*</span> Visitor Observation Request</div><div class="doc-meta"><span>Required</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card required" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name"><span class="req-star">*</span> Personal Information Update</div><div class="doc-meta"><span>Required</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">Service Hours Request</div><div class="doc-meta"><span>Form</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+      </div>
+    </div>
+
+    <!-- Waivers -->
+    <div class="doc-category">
+      <div class="doc-category-header">
+        <div class="doc-category-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 class="doc-category-title">Waivers</h3>
+        <span class="doc-category-count">6 Documents</span>
+      </div>
+      <div class="doc-grid">
+        <a href="#" class="doc-card required" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name"><span class="req-star">*</span> Consent to Medical Treatment (Minors)</div><div class="doc-meta"><span>Required</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card required" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name"><span class="req-star">*</span> Release of Liability (Minors w/ Married Parents)</div><div class="doc-meta"><span>Required</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card required" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name"><span class="req-star">*</span> Release of Liability (Minors w/ Divorced Parents)</div><div class="doc-meta"><span>Required</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card required" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name"><span class="req-star">*</span> Release of Liability (Adult)</div><div class="doc-meta"><span>Required</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card required" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name"><span class="req-star">*</span> Police Training Center (Minors/Adults)</div><div class="doc-meta"><span>Required</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card required" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name"><span class="req-star">*</span> Photo Release</div><div class="doc-meta"><span>Required</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+      </div>
+    </div>
+
+    <!-- Ride-Along Related -->
+    <div class="doc-category">
+      <div class="doc-category-header">
+        <div class="doc-category-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <h3 class="doc-category-title">Ride-Along Related</h3>
+        <span class="doc-category-count">3 Documents</span>
+      </div>
+      <div class="doc-grid">
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">Ride-Along Request</div><div class="doc-meta"><span>Form</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">Ride-Along Officer Certification Packet</div><div class="doc-meta"><span>Form</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">Ride Along Academy Files</div><div class="doc-meta"><span>Training</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+      </div>
+    </div>
+
+    <!-- Scenario Forms -->
+    <div class="doc-category">
+      <div class="doc-category-header">
+        <div class="doc-category-icon purple"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h3 class="doc-category-title">Scenario Forms</h3>
+        <span class="doc-category-count">4 Documents</span>
+      </div>
+      <div class="doc-grid">
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">APOWW Form</div><div class="doc-meta"><span>Scenario</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">Chemical Dependency APOWW Form</div><div class="doc-meta"><span>Scenario</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">Field Sobriety Report</div><div class="doc-meta"><span>Scenario</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">CR3 Crash Form | CR3 Code Sheet</div><div class="doc-meta"><span>Scenario</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+      </div>
+    </div>
+
+    <!-- Training Guides -->
+    <div class="doc-category">
+      <div class="doc-category-header">
+        <div class="doc-category-icon teal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <h3 class="doc-category-title">Training Guides</h3>
+        <span class="doc-category-count">5 Documents</span>
+      </div>
+      <div class="doc-grid">
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">TLEEAA Training Guide</div><div class="doc-meta"><span>Training</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">APOWW / Mental Health</div><div class="doc-meta"><span>Training</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">Search &amp; Seizure Guide</div><div class="doc-meta"><span>Training</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">Transportation Guidebook (12/2004)</div><div class="doc-meta"><span>Training</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+        <a href="#" class="doc-card" target="_blank"><div class="doc-icon pdf">PDF</div><div class="doc-info"><div class="doc-name">Standardized Field Sobriety Test (SFST) Guide</div><div class="doc-meta"><span>Training</span> · <span>PDF</span></div></div><div class="doc-download"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="site-footer" data-style="simple"></div>
+</div>
+
+<div class="logout-bar" id="logoutBar">
+  <span class="logout-status">Authenticated — Members Area</span>
+  <button class="logout-btn" id="logoutBtn">Lock</button>
+</div>
+
+<script>
+const PASSCODE = 'chief761';
+const lockScreen = document.getElementById('lockScreen');
+const membersContent = document.getElementById('membersContent');
+const passcodeInput = document.getElementById('passcodeInput');
+const unlockBtn = document.getElementById('unlockBtn');
+const lockError = document.getElementById('lockError');
+const logoutBar = document.getElementById('logoutBar');
+const logoutBtn = document.getElementById('logoutBtn');
+
+function unlock() {
+  const entered = passcodeInput.value.trim().toLowerCase();
+  if (entered === PASSCODE) {
+    lockScreen.style.display = 'none';
+    membersContent.classList.add('unlocked');
+    logoutBar.classList.add('show');
+    lockError.classList.remove('show');
+    sessionStorage.setItem('rpd761_auth', 'true');
+  } else {
+    lockError.classList.add('show');
+    passcodeInput.value = '';
+    passcodeInput.focus();
+    const card = document.querySelector('.lock-card');
+    card.style.animation = 'none';
+    card.offsetHeight;
+    card.style.animation = 'shake 0.5s ease';
+  }
+}
+
+unlockBtn.addEventListener('click', unlock);
+passcodeInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') unlock();
+  lockError.classList.remove('show');
+});
+
+logoutBtn.addEventListener('click', () => {
+  sessionStorage.removeItem('rpd761_auth');
+  lockScreen.style.display = 'flex';
+  membersContent.classList.remove('unlocked');
+  logoutBar.classList.remove('show');
+  passcodeInput.value = '';
+  passcodeInput.focus();
+});
+
+if (sessionStorage.getItem('rpd761_auth') === 'true') {
+  lockScreen.style.display = 'none';
+  membersContent.classList.add('unlocked');
+  logoutBar.classList.add('show');
+}
+
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
+
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+document.querySelectorAll('.mobile-menu a').forEach(link => { link.addEventListener('click', () => mobileMenu.classList.remove('open')); });
+
+const style = document.createElement('style');
+style.textContent = `@keyframes shake { 0%, 100% { transform: translateX(0); } 15% { transform: translateX(-8px); } 30% { transform: translateX(8px); } 45% { transform: translateX(-6px); } 60% { transform: translateX(6px); } 75% { transform: translateX(-3px); } 90% { transform: translateX(3px); } }`;
+document.head.appendChild(style);
+</script>
+<script src="shared.js"></script>
+</body>
+</html>
