@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Training — Richardson Police Public Safety Cadets Unit #761</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#1a2744;--navy-deep:#0f1a30;--navy-light:#253758;--red:#c0392b;--red-glow:#e74c3c;--gold:#d4a952;--white:#fff;--text-muted:#8899b0;--green:#27ae60;--blue:#3498db;--purple:#8e44ad;--card-bg:rgba(255,255,255,0.025);--card-border:rgba(255,255,255,0.06);--input-bg:rgba(255,255,255,0.04);--input-border:rgba(255,255,255,0.1)}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',sans-serif;background:var(--navy-deep);color:var(--white);-webkit-font-smoothing:antialiased;min-height:100vh}
+.container{max-width:960px;margin:0 auto;padding:0 24px}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(15,26,48,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);transition:all .4s}
+nav.scrolled{background:rgba(15,26,48,0.97);box-shadow:0 4px 30px rgba(0,0,0,0.3)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:72px}
+.nav-brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--white)}
+.nav-brand img{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,0.15)}
+.nav-brand-text{display:flex;flex-direction:column;line-height:1.15}
+.nav-brand-dept{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold)}
+.nav-brand-unit{font-family:'Barlow Condensed',sans-serif;font-weight:400;font-size:13px;letter-spacing:1px;color:var(--text-muted)}
+.nav-links{display:flex;align-items:center;gap:8px;list-style:none}
+.nav-links a{text-decoration:none;color:rgba(255,255,255,0.7);font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;padding:8px 16px;border-radius:6px;transition:all .3s;position:relative}
+.nav-links a:hover,.nav-links a.active{color:var(--white);background:rgba(255,255,255,0.08)}
+.nav-links a.active::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:16px;height:2px;background:var(--red);border-radius:2px}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none}
+.hamburger span{width:24px;height:2px;background:var(--white);border-radius:2px}
+.mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(15,26,48,0.98);backdrop-filter:blur(20px);padding:24px;border-bottom:1px solid rgba(255,255,255,0.06);z-index:999}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;padding:14px 0;color:rgba(255,255,255,0.7);text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:16px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.04)}
+.mobile-menu a:last-child{border-bottom:none}
+footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.05);padding:40px 0}
+.footer-bottom{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.3)}
+.footer-back a{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);text-decoration:none}
+
+/* LOCK */
+.lock-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:72px 24px 40px;position:relative}
+.lock-bg{position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(26,39,68,0.95) 0%,rgba(15,26,48,1) 70%);z-index:0}
+.lock-bg::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);background-size:60px 60px}
+.lock-card{position:relative;z-index:1;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:60px 48px;max-width:440px;width:100%;text-align:center;backdrop-filter:blur(10px);box-shadow:0 30px 80px rgba(0,0,0,0.3);animation:cardIn .6s ease forwards}
+@keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(0.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.lock-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold),var(--red));border-radius:20px 20px 0 0}
+.lock-icon{width:72px;height:72px;margin:0 auto 28px;background:rgba(192,57,43,0.1);border:1px solid rgba(192,57,43,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.lock-icon svg{color:var(--red)}
+.lock-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;margin-bottom:8px}
+.lock-subtitle{font-weight:300;font-size:14px;color:var(--text-muted);margin-bottom:36px;line-height:1.6}
+.lock-input{width:100%;padding:16px 20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:var(--white);font-family:'Barlow',sans-serif;font-size:16px;letter-spacing:4px;text-align:center;outline:none;transition:all .3s}
+.lock-input::placeholder{letter-spacing:1px;color:rgba(255,255,255,0.25);font-size:14px}
+.lock-input:focus{border-color:rgba(192,57,43,0.5);background:rgba(255,255,255,0.06);box-shadow:0 0 20px rgba(192,57,43,0.1)}
+.lock-btn{width:100%;padding:16px;background:var(--red);color:var(--white);border:none;border-radius:10px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:all .35s;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 4px 20px rgba(192,57,43,0.3);margin-top:20px}
+.lock-btn:hover{background:var(--red-glow);transform:translateY(-2px)}
+.lock-error{margin-top:16px;font-size:13px;color:var(--red-glow);opacity:0;transition:opacity .3s;height:20px}
+.lock-error.show{opacity:1}
+.lock-home{margin-top:32px}
+.lock-home a{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.training-content{display:none;padding:120px 0 80px}
+.training-content.unlocked{display:block;animation:fadeIn .6s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* Page header */
+.page-header{text-align:center;margin-bottom:32px}
+.section-label{font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:12px}
+.section-label::before{content:'';width:24px;height:1px;background:var(--red)}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,48px);letter-spacing:2px;line-height:1;margin-bottom:12px}
+.page-desc{font-weight:300;font-size:15px;color:rgba(255,255,255,0.5);max-width:520px;margin:0 auto;line-height:1.7}
+
+/* TABS */
+.tab-bar{display:flex;gap:4px;background:rgba(255,255,255,0.03);border:1px solid var(--card-border);border-radius:12px;padding:4px;margin-bottom:32px}
+.tab-btn{flex:1;padding:14px 16px;border:none;background:transparent;color:var(--text-muted);font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;border-radius:8px;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap}
+.tab-btn:hover{color:var(--white);background:rgba(255,255,255,0.04)}
+.tab-btn.active{background:var(--red);color:var(--white);box-shadow:0 4px 16px rgba(192,57,43,0.3)}
+.tab-btn svg{width:16px;height:16px;flex-shrink:0}
+.tab-panel{display:none;animation:fadeTab .4s ease}
+.tab-panel.active{display:block}
+@keyframes fadeTab{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══ SCHEDULE STYLES ═══ */
+.info-banner{background:rgba(255,255,255,0.03);border:1px solid var(--card-border);border-radius:12px;padding:18px 24px;margin-bottom:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.info-banner-icon{width:40px;height:40px;border-radius:10px;background:rgba(192,57,43,0.1);border:1px solid rgba(192,57,43,0.2);display:flex;align-items:center;justify-content:center;color:var(--red);flex-shrink:0}
+.info-banner-text{flex:1}
+.info-banner-main{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;letter-spacing:1px;margin-bottom:2px}
+.info-banner-sub{font-size:12px;color:var(--text-muted);font-weight:300}
+.month-nav-bar{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:24px;position:sticky;top:72px;z-index:50;background:var(--navy-deep);padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.month-jump{padding:6px 14px;border-radius:6px;background:rgba(255,255,255,0.03);border:1px solid var(--card-border);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);cursor:pointer;transition:all .3s;text-decoration:none}
+.month-jump:hover,.month-jump.active{background:var(--red);color:var(--white);border-color:var(--red)}
+.legend{display:flex;gap:16px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:6px;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted)}
+.legend-dot{width:8px;height:8px;border-radius:3px}
+.legend-dot.training{background:var(--blue)}.legend-dot.competition{background:var(--gold)}.legend-dot.special{background:var(--purple)}.legend-dot.off{background:var(--red)}
+.month-section{margin-bottom:36px}
+.month-header{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.month-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px}
+.month-line{flex:1;height:1px;background:rgba(255,255,255,0.08)}
+.month-year{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;color:var(--text-muted)}
+.ev{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;margin-bottom:5px;transition:all .25s;position:relative;overflow:hidden}
+.ev:hover{background:rgba(255,255,255,0.04)}
+.ev::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
+.ev.t::before{background:var(--blue)}.ev.c::before{background:var(--gold)}.ev.s::before{background:var(--purple)}.ev.o::before{background:var(--red);opacity:.5}
+.ev.o{opacity:.5}
+.ev-d{min-width:44px;text-align:center;flex-shrink:0}
+.ev-day{font-family:'Bebas Neue',sans-serif;font-size:24px;line-height:1}
+.ev-dow{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted)}
+.ev-div{width:1px;height:28px;background:rgba(255,255,255,0.06);flex-shrink:0}
+.ev-i{flex:1}
+.ev-topic{font-weight:500;font-size:14px;margin-bottom:1px}
+.ev-time{font-size:11px;color:var(--text-muted)}
+.ev-tag{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:20px;flex-shrink:0}
+.tag-t{background:rgba(52,152,219,0.12);color:var(--blue)}.tag-c{background:rgba(212,169,82,0.12);color:var(--gold)}.tag-s{background:rgba(142,68,173,0.12);color:var(--purple)}.tag-o{background:rgba(220,38,38,0.1);color:var(--red-glow)}
+.ev-feat{padding:20px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:14px;margin-bottom:6px;position:relative;overflow:hidden;transition:all .3s}
+.ev-feat:hover{background:rgba(255,255,255,0.04);transform:translateY(-2px)}
+.ev-feat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.ev-feat.c::before{background:linear-gradient(90deg,var(--gold),var(--red),var(--gold))}.ev-feat.s::before{background:linear-gradient(90deg,var(--purple),var(--gold),var(--purple))}
+.feat-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}
+.feat-date{display:flex;flex-direction:column;align-items:center;min-width:48px}
+.feat-mo{font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--red)}
+.feat-day{font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:1}
+.feat-dow{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:1px;color:var(--text-muted)}
+.feat-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;line-height:1.1;margin-bottom:4px}
+.feat-desc{font-size:12px;color:var(--text-muted);font-weight:300}
+.ev.is-past,.ev-feat.is-past{opacity:.35}
+.ev.is-today{border-color:rgba(192,57,43,0.3);background:rgba(192,57,43,0.04)}
+.ev.is-today .ev-day{color:var(--red)}
+
+/* ═══ RESOURCE HUB STYLES ═══ */
+.sub-tabs{display:flex;gap:4px;background:rgba(255,255,255,0.03);border:1px solid var(--card-border);border-radius:12px;padding:4px;margin-bottom:28px}
+.sub-tab{flex:1;padding:14px 10px;border:none;background:transparent;color:var(--text-muted);font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;border-radius:8px;cursor:pointer;transition:all .3s;text-align:center;white-space:nowrap}
+.sub-tab:hover{color:var(--white);background:rgba(255,255,255,0.04)}
+.sub-tab.active{background:var(--red);color:var(--white);box-shadow:0 4px 16px rgba(192,57,43,0.3)}
+.sub-panel{display:none;animation:fadeTab .4s ease}
+.sub-panel.active{display:block}
+.search-bar{margin-bottom:20px;position:relative}
+.search-bar input{width:100%;padding:12px 16px 12px 44px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:10px;color:var(--white);font-size:14px;outline:none;transition:all .3s;font-family:'Barlow',sans-serif}
+.search-bar input:focus{border-color:rgba(192,57,43,0.4);box-shadow:0 0 16px rgba(192,57,43,0.08)}
+.search-bar input::placeholder{color:rgba(255,255,255,0.2)}
+.search-bar svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-muted);opacity:.5}
+.search-count{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);text-align:right;margin-top:6px}
+.code-grid{display:flex;flex-direction:column;gap:3px}
+.cr{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;transition:all .2s}
+.cr:hover{background:rgba(255,255,255,0.04)}
+.cr.hidden{display:none}
+.cr-n{font-family:'Bebas Neue',sans-serif;font-size:20px;min-width:48px;color:var(--red);text-align:center;flex-shrink:0}
+.cr-div{width:1px;height:22px;background:rgba(255,255,255,0.06);flex-shrink:0}
+.cr-d{font-size:13px;color:rgba(255,255,255,0.7);flex:1}
+.cr-note{font-size:10px;color:var(--text-muted);font-style:italic;margin-top:1px}
+.code-cat{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);padding:14px 0 6px;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:3px}
+.alpha-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:5px}
+.alpha-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px}
+.alpha-item:hover{background:rgba(255,255,255,0.04)}
+.alpha-letter{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--red);width:24px;text-align:center}
+.alpha-word{font-size:13px;color:rgba(255,255,255,0.7)}
+.miranda-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;overflow:hidden;max-width:600px;margin:0 auto}
+.miranda-header{background:rgba(192,57,43,0.08);padding:18px 24px;border-bottom:1px solid rgba(192,57,43,0.15);display:flex;align-items:center;justify-content:space-between}
+.miranda-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px}
+.miranda-toggle{display:flex;gap:2px;background:rgba(0,0,0,0.2);border-radius:6px;padding:2px}
+.miranda-toggle button{padding:6px 16px;border:none;background:transparent;color:var(--text-muted);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;border-radius:4px;cursor:pointer;transition:all .3s}
+.miranda-toggle button.active{background:var(--red);color:var(--white)}
+.miranda-body{padding:24px}
+.miranda-text{display:none}
+.miranda-text.active{display:block}
+.miranda-item{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:14px;line-height:1.7;color:rgba(255,255,255,0.75);display:flex;gap:10px}
+.miranda-item:last-of-type{border-bottom:none}
+.miranda-num{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--red);min-width:24px;flex-shrink:0}
+.miranda-footer{padding:16px 24px;background:rgba(0,0,0,0.1);border-top:1px solid rgba(255,255,255,0.04);font-size:12px;color:var(--text-muted);line-height:1.7;font-style:italic}
+.cad-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:5px}
+.cad-row{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px}
+.cad-row:hover{background:rgba(255,255,255,0.04)}
+.cad-row.hidden{display:none}
+.cad-code{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1px;color:var(--gold);min-width:32px}
+.cad-desc{font-size:12px;color:rgba(255,255,255,0.65)}
+
+@media(max-width:900px){.nav-links{display:none}.hamburger{display:flex}}
+@media(max-width:600px){
+.tab-btn{font-size:11px;padding:12px 8px;letter-spacing:1px}.tab-btn svg{display:none}
+.sub-tab{font-size:10px;padding:12px 6px;letter-spacing:.8px}
+.info-banner{flex-direction:column;text-align:center}
+.ev-tag{display:none}.ev-d{min-width:38px}.ev-day{font-size:20px}
+.month-nav-bar{gap:4px}.month-jump{padding:5px 10px;font-size:11px}
+.alpha-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+.cad-grid{grid-template-columns:1fr}
+.footer-bottom{flex-direction:column;text-align:center}
+}
+@media(max-width:500px){.lock-card{padding:48px 28px}}
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<!-- LOCK -->
+<div class="lock-screen" id="lockScreen">
+<div class="lock-bg"></div>
+<div class="lock-card">
+<div class="lock-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+<h2 class="lock-title">Cadets Only</h2>
+<p class="lock-subtitle">Training resources are restricted to unit members.<br>Enter your unit passcode to continue.</p>
+<input type="password" class="lock-input" id="passcodeInput" placeholder="Enter passcode" autocomplete="off" autofocus>
+<button class="lock-btn" id="unlockBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>Unlock</button>
+<div class="lock-error" id="lockError">Incorrect passcode. Please try again.</div>
+<div class="lock-home"><a href="index.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Return to Home</a></div>
+</div>
+</div>
+
+<!-- TRAINING CONTENT -->
+<div class="training-content" id="trainingContent">
+<div class="container">
+<div class="page-header">
+<div class="section-label">Training Center</div>
+<h1 class="section-title">Training Hub</h1>
+<p class="page-desc">Training schedule, quick reference materials, and resources for cadets.</p>
+</div>
+
+<div class="tab-bar">
+<button class="tab-btn active" onclick="switchTab('schedule')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Schedule</button>
+<button class="tab-btn" onclick="switchTab('resources')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Resources</button>
+</div>
+
+<!-- ═══ SCHEDULE PANEL ═══ -->
+<div class="tab-panel active" id="panelSchedule">
+<div class="info-banner">
+<div class="info-banner-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+<div class="info-banner-text"><div class="info-banner-main">Every Thursday · 6:00 PM – 9:00 PM · Richardson PD</div><div class="info-banner-sub">Optional PT: 5:45 PM (before) &amp; 9:00 PM (after) — 15 minutes each</div></div>
+</div>
+<div class="month-nav-bar" id="monthNav">
+<a href="#apr" class="month-jump">Apr</a><a href="#may" class="month-jump">May</a><a href="#jun" class="month-jump">Jun</a><a href="#jul" class="month-jump">Jul</a><a href="#aug" class="month-jump">Aug</a><a href="#sep" class="month-jump">Sep</a><a href="#oct" class="month-jump">Oct</a><a href="#nov" class="month-jump">Nov</a><a href="#dec" class="month-jump">Dec</a>
+</div>
+<div class="legend">
+<div class="legend-item"><div class="legend-dot training"></div>Training</div>
+<div class="legend-item"><div class="legend-dot competition"></div>Competition</div>
+<div class="legend-item"><div class="legend-dot special"></div>Special Event</div>
+<div class="legend-item"><div class="legend-dot off"></div>No Meeting</div>
+</div>
+
+<!-- APRIL -->
+<div class="month-section" id="apr"><div class="month-header"><span class="month-name">April</span><div class="month-line"></div><span class="month-year">2026</span></div>
+<div class="ev t" data-date="2026-04-02"><div class="ev-d"><div class="ev-day">2</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Patrol Tactics / Combat Fitness Test</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-04-09"><div class="ev-d"><div class="ev-day">9</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Domestic Violence</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-04-16"><div class="ev-d"><div class="ev-day">16</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Robbery In Progress</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-04-23"><div class="ev-d"><div class="ev-day">23</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Robbery In Progress</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-04-30"><div class="ev-d"><div class="ev-day">30</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Domestic Violence</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+</div>
+
+<!-- MAY -->
+<div class="month-section" id="may"><div class="month-header"><span class="month-name">May</span><div class="month-line"></div><span class="month-year">2026</span></div>
+<div class="ev-feat s" data-date="2026-05-07"><div class="feat-top"><div class="feat-date"><span class="feat-mo">May</span><span class="feat-day">7</span><span class="feat-dow">Thursday</span></div><span class="ev-tag tag-s">Special Event</span></div><div class="feat-title">Annual Banquet</div><div class="feat-desc">End-of-year awards banquet. No regular training this week.</div></div>
+<div class="ev t" data-date="2026-05-14"><div class="ev-d"><div class="ev-day">14</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Active Threat</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-05-21"><div class="ev-d"><div class="ev-day">21</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Active Threat</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev o" data-date="2026-05-28"><div class="ev-d"><div class="ev-day">28</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">No Meeting — First Week of Summer Break</div><div class="ev-time">—</div></div><span class="ev-tag tag-o">No Meeting</span></div>
+<div class="ev-feat c" data-date="2026-05-30"><div class="feat-top"><div class="feat-date"><span class="feat-mo">May</span><span class="feat-day">30</span><span class="feat-dow">Saturday</span></div><span class="ev-tag tag-c">Competition</span></div><div class="feat-title">Central Texas Public Safety Cadet Competition</div><div class="feat-desc">Team 1 deployment.</div></div>
+<div class="ev-feat c" data-date="2026-05-30"><div class="feat-top"><div class="feat-date"><span class="feat-mo">May</span><span class="feat-day">30</span><span class="feat-dow">Saturday</span></div><span class="ev-tag tag-c">Competition</span></div><div class="feat-title">Allen Overnight Competition</div><div class="feat-desc">Team 2 deployment. Overnight event.</div></div>
+</div>
+
+<!-- JUNE -->
+<div class="month-section" id="jun"><div class="month-header"><span class="month-name">June</span><div class="month-line"></div><span class="month-year">2026</span></div>
+<div class="ev t" data-date="2026-06-04"><div class="ev-d"><div class="ev-day">4</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Bomb Threats</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-06-11"><div class="ev-d"><div class="ev-day">11</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">SABA / Officer Down</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-06-18"><div class="ev-d"><div class="ev-day">18</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Suspicious Person</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev-feat s" data-date="2026-06-25"><div class="feat-top"><div class="feat-date"><span class="feat-mo">Jun</span><span class="feat-day">25</span><span class="feat-dow">Thursday</span></div><span class="ev-tag tag-s">Special</span></div><div class="feat-title">Ride Along Academy</div><div class="feat-desc">Ride-along preparation and certification training.</div></div>
+</div>
+
+<!-- JULY -->
+<div class="month-section" id="jul"><div class="month-header"><span class="month-name">July</span><div class="month-line"></div><span class="month-year">2026</span></div>
+<div class="ev-feat s" data-date="2026-07-02"><div class="feat-top"><div class="feat-date"><span class="feat-mo">Jul</span><span class="feat-day">2</span><span class="feat-dow">Thursday</span></div><span class="ev-tag tag-s">Special</span></div><div class="feat-title">Ride Along Academy (Cont.)</div><div class="feat-desc">Continuation of ride-along certification training.</div></div>
+<div class="ev t" data-date="2026-07-09"><div class="ev-d"><div class="ev-day">9</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Cadet Sergeant's Choice — TBD</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-07-16"><div class="ev-d"><div class="ev-day">16</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Report Writing / Interview Skills</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev-feat c" data-date="2026-07-23"><div class="feat-top"><div class="feat-date"><span class="feat-mo">Jul</span><span class="feat-day">23</span><span class="feat-dow">Thursday</span></div><span class="ev-tag tag-c">Competition</span></div><div class="feat-title">Intra-Post Competition</div><div class="feat-desc">Internal unit competition — squads compete against each other.</div></div>
+<div class="ev t" data-date="2026-07-30"><div class="ev-d"><div class="ev-day">30</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Searching People / Scenes</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+</div>
+
+<!-- AUGUST -->
+<div class="month-section" id="aug"><div class="month-header"><span class="month-name">August</span><div class="month-line"></div><span class="month-year">2026</span></div>
+<div class="ev t" data-date="2026-08-06"><div class="ev-d"><div class="ev-day">6</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Crash Investigation</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev o" data-date="2026-08-13"><div class="ev-d"><div class="ev-day">13</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">No Meeting — First Week of School</div><div class="ev-time">—</div></div><span class="ev-tag tag-o">No Meeting</span></div>
+<div class="ev-feat s" data-date="2026-08-20"><div class="feat-top"><div class="feat-date"><span class="feat-mo">Aug</span><span class="feat-day">20</span><span class="feat-dow">Thursday</span></div><span class="ev-tag tag-s">Special</span></div><div class="feat-title">Fun Day</div><div class="feat-desc">Team building and recreational activities.</div></div>
+<div class="ev t" data-date="2026-08-27"><div class="ev-d"><div class="ev-day">27</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">White Collar Crime</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+</div>
+
+<!-- SEPTEMBER -->
+<div class="month-section" id="sep"><div class="month-header"><span class="month-name">September</span><div class="month-line"></div><span class="month-year">2026</span></div>
+<div class="ev t" data-date="2026-09-03"><div class="ev-d"><div class="ev-day">3</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Burglary in Progress</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-09-10"><div class="ev-d"><div class="ev-day">10</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Cadet Sergeant's Choice — TBD</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-09-17"><div class="ev-d"><div class="ev-day">17</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Penal Code Assaultive Crimes</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-09-24"><div class="ev-d"><div class="ev-day">24</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Gangs</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+</div>
+
+<!-- OCTOBER -->
+<div class="month-section" id="oct"><div class="month-header"><span class="month-name">October</span><div class="month-line"></div><span class="month-year">2026</span></div>
+<div class="ev t" data-date="2026-10-01"><div class="ev-d"><div class="ev-day">1</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Suspicious Person</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-10-08"><div class="ev-d"><div class="ev-day">8</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Misdemeanor Traffic Stops</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-10-15"><div class="ev-d"><div class="ev-day">15</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Felony Traffic Stops</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-10-22"><div class="ev-d"><div class="ev-day">22</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Intoxicated Driver</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-10-29"><div class="ev-d"><div class="ev-day">29</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Unknown Call Type</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+</div>
+
+<!-- NOVEMBER -->
+<div class="month-section" id="nov"><div class="month-header"><span class="month-name">November</span><div class="month-line"></div><span class="month-year">2026</span></div>
+<div class="ev t" data-date="2026-11-05"><div class="ev-d"><div class="ev-day">5</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Building Searches</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-11-12"><div class="ev-d"><div class="ev-day">12</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Patrol Tactics / Radio Comm</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-11-19"><div class="ev-d"><div class="ev-day">19</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Robbery In Progress</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev o" data-date="2026-11-26"><div class="ev-d"><div class="ev-day">26</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">No Meeting — Thanksgiving</div><div class="ev-time">—</div></div><span class="ev-tag tag-o">No Meeting</span></div>
+</div>
+
+<!-- DECEMBER -->
+<div class="month-section" id="dec"><div class="month-header"><span class="month-name">December</span><div class="month-line"></div><span class="month-year">2026</span></div>
+<div class="ev t" data-date="2026-12-03"><div class="ev-d"><div class="ev-day">3</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Domestic Violence</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-12-10"><div class="ev-d"><div class="ev-day">10</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Crime Scene</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev t" data-date="2026-12-17"><div class="ev-d"><div class="ev-day">17</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">Active Threat</div><div class="ev-time">6:00 PM – 9:00 PM</div></div><span class="ev-tag tag-t">Training</span></div>
+<div class="ev o" data-date="2026-12-24"><div class="ev-d"><div class="ev-day">24</div><div class="ev-dow">Thu</div></div><div class="ev-div"></div><div class="ev-i"><div class="ev-topic">No Meeting — Christmas</div><div class="ev-time">—</div></div><span class="ev-tag tag-o">No Meeting</span></div>
+</div>
+
+</div><!-- end schedule panel -->
+
+<!-- ═══ RESOURCES PANEL ═══ -->
+<div class="tab-panel" id="panelResources">
+<div class="sub-tabs">
+<button class="sub-tab active" onclick="showSub('signals')">Signals</button>
+<button class="sub-tab" onclick="showSub('tencodes')">10-Codes</button>
+<button class="sub-tab" onclick="showSub('miranda')">Miranda</button>
+<button class="sub-tab" onclick="showSub('cad')">CAD</button>
+<button class="sub-tab" onclick="showSub('alpha')">Alpha</button>
+</div>
+
+<!-- SIGNALS -->
+<div class="sub-panel active" id="subSignals">
+<div class="search-bar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Search signals..." oninput="filterC(this.value,'sr','sc1')"></div><div class="search-count" id="sc1"></div>
+<div class="code-grid">
+<div class="cr sr" data-s="1 abandoned vehicle"><div class="cr-n">1</div><div class="cr-div"></div><div class="cr-d">Abandoned Vehicle</div></div>
+<div class="cr sr" data-s="2 assaultive offense"><div class="cr-n">2</div><div class="cr-div"></div><div class="cr-d">Assaultive Offense</div></div>
+<div class="cr sr" data-s="2x assault in progress"><div class="cr-n">2X</div><div class="cr-div"></div><div class="cr-d">Assault In Progress</div></div>
+<div class="cr sr" data-s="3 vandalism"><div class="cr-n">3</div><div class="cr-div"></div><div class="cr-d">Vandalism</div></div>
+<div class="cr sr" data-s="3x vandalism in progress"><div class="cr-n">3X</div><div class="cr-div"></div><div class="cr-d">Vandalism In Progress</div></div>
+<div class="cr sr" data-s="4 alarm residential"><div class="cr-n">4</div><div class="cr-div"></div><div class="cr-d">Alarm – Residential</div></div>
+<div class="cr sr" data-s="4a alarm unknown"><div class="cr-n">4A</div><div class="cr-div"></div><div class="cr-d">Alarm – Unknown</div></div>
+<div class="cr sr" data-s="4b burglary in progress"><div class="cr-n">4B</div><div class="cr-div"></div><div class="cr-d">Burglary In Progress</div></div>
+<div class="cr sr" data-s="5 burglary business"><div class="cr-n">5</div><div class="cr-div"></div><div class="cr-d">Burglary – Business</div></div>
+<div class="cr sr" data-s="5x burglary in progress"><div class="cr-n">5X</div><div class="cr-div"></div><div class="cr-d">Burglary In Progress</div></div>
+<div class="cr sr" data-s="6 city ordinance violation"><div class="cr-n">6</div><div class="cr-div"></div><div class="cr-d">City Ordinance Violation</div></div>
+<div class="cr sr" data-s="7 criminal trespass drug narcotic"><div class="cr-n">7</div><div class="cr-div"></div><div class="cr-d">Criminal Trespass / Drug/Narcotic Related</div></div>
+<div class="cr sr" data-s="8 deceased person"><div class="cr-n">8</div><div class="cr-div"></div><div class="cr-d">Deceased Person</div></div>
+<div class="cr sr" data-s="9 mental health"><div class="cr-n">9</div><div class="cr-div"></div><div class="cr-d">Mental Health</div></div>
+<div class="cr sr" data-s="10 disorderly conduct"><div class="cr-n">10</div><div class="cr-div"></div><div class="cr-d">Disorderly Conduct</div></div>
+<div class="cr sr" data-s="11 disturbance"><div class="cr-n">11</div><div class="cr-div"></div><div class="cr-d">Disturbance</div></div>
+<div class="cr sr" data-s="12 construction noise"><div class="cr-n">12</div><div class="cr-div"></div><div class="cr-d">Construction / Noise</div></div>
+<div class="cr sr" data-s="12c disturbance in progress"><div class="cr-n">12C</div><div class="cr-div"></div><div class="cr-d">Disturbance In Progress</div></div>
+<div class="cr sr" data-s="12x disturbance in progress people physical verbal"><div class="cr-n">12X</div><div class="cr-div"></div><div class="cr-d">Disturbance In Progress<div class="cr-note">(People involved in a physical or verbal disturbance)</div></div></div>
+<div class="cr sr" data-s="13 harassment"><div class="cr-n">13</div><div class="cr-div"></div><div class="cr-d">Harassment</div></div>
+<div class="cr sr" data-s="14 public intoxication"><div class="cr-n">14</div><div class="cr-div"></div><div class="cr-d">Public Intoxication</div></div>
+<div class="cr sr" data-s="15 escort immediate urgent transport"><div class="cr-n">15</div><div class="cr-div"></div><div class="cr-d">Escort<div class="cr-note">(Immediate/Urgent Transport)</div></div></div>
+<div class="cr sr" data-s="15x fire call"><div class="cr-n">15X</div><div class="cr-div"></div><div class="cr-d">Fire Call</div></div>
+<div class="cr sr" data-s="16 found property"><div class="cr-n">16</div><div class="cr-div"></div><div class="cr-d">Found Property</div></div>
+<div class="cr sr" data-s="17 school visit shoplifter"><div class="cr-n">17</div><div class="cr-div"></div><div class="cr-d">School Visit / Shoplifter</div></div>
+<div class="cr sr" data-s="18 fraud"><div class="cr-n">18</div><div class="cr-div"></div><div class="cr-d">Fraud</div></div>
+<div class="cr sr" data-s="18x fraud in progress"><div class="cr-n">18X</div><div class="cr-div"></div><div class="cr-d">Fraud In Progress</div></div>
+<div class="cr sr" data-s="19 gambling"><div class="cr-n">19</div><div class="cr-div"></div><div class="cr-d">Gambling</div></div>
+<div class="cr sr" data-s="20 homicide"><div class="cr-n">20</div><div class="cr-div"></div><div class="cr-d">Homicide</div></div>
+<div class="cr sr" data-s="21 public indecency"><div class="cr-n">21</div><div class="cr-div"></div><div class="cr-d">Public Indecency</div></div>
+<div class="cr sr" data-s="22 intoxicated driver"><div class="cr-n">22</div><div class="cr-div"></div><div class="cr-d">Intoxicated Driver</div></div>
+<div class="cr sr" data-s="23 animal complaint"><div class="cr-n">23</div><div class="cr-div"></div><div class="cr-d">Animal Complaint</div></div>
+<div class="cr sr" data-s="24 weapons offense in progress"><div class="cr-n">24</div><div class="cr-div"></div><div class="cr-d">Weapons Offense In Progress</div></div>
+<div class="cr sr" data-s="24x weapons offense in progress"><div class="cr-n">24X</div><div class="cr-div"></div><div class="cr-d">Weapons Offense In Progress</div></div>
+<div class="cr sr" data-s="25 meet complainant misc"><div class="cr-n">25</div><div class="cr-div"></div><div class="cr-d">Meet Complainant/Misc.</div></div>
+<div class="cr sr" data-s="26 missing person runaway"><div class="cr-n">26</div><div class="cr-div"></div><div class="cr-d">Missing Person/Runaway</div></div>
+<div class="cr sr" data-s="26x missing person runaway special"><div class="cr-n">26X</div><div class="cr-div"></div><div class="cr-d">Missing Person/Runaway<div class="cr-note">(Special Circumstances)</div></div></div>
+<div class="cr sr" data-s="27 open door window reported"><div class="cr-n">27</div><div class="cr-div"></div><div class="cr-d">Open Door/Window Reported</div></div>
+<div class="cr sr" data-s="28 parking violation"><div class="cr-n">28</div><div class="cr-div"></div><div class="cr-d">Parking Violation</div></div>
+<div class="cr sr" data-s="29 prowler window peeper"><div class="cr-n">29</div><div class="cr-div"></div><div class="cr-d">Prowler/Window Peeper</div></div>
+<div class="cr sr" data-s="29x prowler in progress"><div class="cr-n">29X</div><div class="cr-div"></div><div class="cr-d">Prowler In Progress</div></div>
+<div class="cr sr" data-s="30 robbery"><div class="cr-n">30</div><div class="cr-div"></div><div class="cr-d">Robbery</div></div>
+<div class="cr sr" data-s="30x robbery in progress"><div class="cr-n">30X</div><div class="cr-div"></div><div class="cr-d">Robbery In Progress</div></div>
+<div class="cr sr" data-s="31 robbery alarm"><div class="cr-n">31</div><div class="cr-div"></div><div class="cr-d">Robbery Alarm</div></div>
+<div class="cr sr" data-s="32 security survey business"><div class="cr-n">32</div><div class="cr-div"></div><div class="cr-d">Security Survey/Business</div></div>
+<div class="cr sr" data-s="33 security surveillance"><div class="cr-n">33</div><div class="cr-div"></div><div class="cr-d">Security Surveillance</div></div>
+<div class="cr sr" data-s="34 sexual offense"><div class="cr-n">34</div><div class="cr-div"></div><div class="cr-d">Sexual Offense</div></div>
+<div class="cr sr" data-s="35 suicide"><div class="cr-n">35</div><div class="cr-div"></div><div class="cr-d">Suicide</div></div>
+<div class="cr sr" data-s="36 public assistance"><div class="cr-n">36</div><div class="cr-div"></div><div class="cr-d">Public Assistance</div></div>
+<div class="cr sr" data-s="37 suspicious person"><div class="cr-n">37</div><div class="cr-div"></div><div class="cr-d">Suspicious Person</div></div>
+<div class="cr sr" data-s="38 suspicious vehicle"><div class="cr-n">38</div><div class="cr-div"></div><div class="cr-d">Suspicious Vehicle</div></div>
+<div class="cr sr" data-s="39 threats"><div class="cr-n">39</div><div class="cr-div"></div><div class="cr-d">Threats</div></div>
+<div class="cr sr" data-s="40 theft"><div class="cr-n">40</div><div class="cr-div"></div><div class="cr-d">Theft</div></div>
+<div class="cr sr" data-s="40x theft in progress"><div class="cr-n">40X</div><div class="cr-div"></div><div class="cr-d">Theft In Progress</div></div>
+<div class="cr sr" data-s="41 public safety hazard"><div class="cr-n">41</div><div class="cr-div"></div><div class="cr-d">Public Safety Hazard</div></div>
+<div class="cr sr" data-s="42 warrant service"><div class="cr-n">42</div><div class="cr-div"></div><div class="cr-d">Warrant Service</div></div>
+<div class="cr sr" data-s="43 minor accident"><div class="cr-n">43</div><div class="cr-div"></div><div class="cr-d">Minor Accident</div></div>
+<div class="cr sr" data-s="43x major accident vehicles road"><div class="cr-n">43X</div><div class="cr-div"></div><div class="cr-d">Major Accident<div class="cr-note">(Vehicles in Road)</div></div></div>
+<div class="cr sr" data-s="44 kidnapping abduction"><div class="cr-n">44</div><div class="cr-div"></div><div class="cr-d">Kidnapping/Abduction</div></div>
+<div class="cr sr" data-s="45 family violence"><div class="cr-n">45</div><div class="cr-div"></div><div class="cr-d">Family Violence</div></div>
+<div class="cr sr" data-s="46x building security in progress"><div class="cr-n">46X</div><div class="cr-div"></div><div class="cr-d">Building Security In Progress</div></div>
+<div class="cr sr" data-s="47 building security check"><div class="cr-n">47</div><div class="cr-div"></div><div class="cr-d">Building Security Check</div></div>
+<div class="cr sr" data-s="48 soliciting"><div class="cr-n">48</div><div class="cr-div"></div><div class="cr-d">Soliciting</div></div>
+<div class="cr sr" data-s="49 bomb threat"><div class="cr-n">49</div><div class="cr-div"></div><div class="cr-d">Bomb Threat</div></div>
+<div class="cr sr" data-s="50 911 hangup"><div class="cr-n">50</div><div class="cr-div"></div><div class="cr-d">911 Hangup</div></div>
+<div class="cr sr" data-s="55 neighborhood ofc activity"><div class="cr-n">55</div><div class="cr-div"></div><div class="cr-d">Neighborhood Ofc. Activity</div></div>
+<div class="cr sr" data-s="56 curfew violation"><div class="cr-n">56</div><div class="cr-div"></div><div class="cr-d">Curfew Violation</div></div>
+<div class="cr sr" data-s="60 city panic alarm"><div class="cr-n">60</div><div class="cr-div"></div><div class="cr-d">City Panic Alarm</div></div>
+<div class="cr sr" data-s="61 commercial motor vehicle"><div class="cr-n">61</div><div class="cr-div"></div><div class="cr-d">Commercial Motor Vehicle</div></div>
+<div class="cr sr" data-s="62 enforcement"><div class="cr-n">62</div><div class="cr-div"></div><div class="cr-d">Enforcement</div></div>
+<div class="cr sr" data-s="70 canine deployment"><div class="cr-n">70</div><div class="cr-div"></div><div class="cr-d">Canine Deployment</div></div>
+<div class="cr sr" data-s="71 ets"><div class="cr-n">71</div><div class="cr-div"></div><div class="cr-d">ETS</div></div>
+<div class="cr sr" data-s="72 bicycle assignment"><div class="cr-n">72</div><div class="cr-div"></div><div class="cr-d">Bicycle Assignment</div></div>
+<div class="cr sr" data-s="73 uas deployment"><div class="cr-n">73</div><div class="cr-div"></div><div class="cr-d">UAS Deployment</div></div>
+<div class="cr sr" data-s="75 social harm crime"><div class="cr-n">75</div><div class="cr-div"></div><div class="cr-d">Social Harm Crime</div></div>
+<div class="cr sr" data-s="76 crisis intervention team cit"><div class="cr-n">76</div><div class="cr-div"></div><div class="cr-d">Crisis Intervention Team (CIT)</div></div>
+<div class="cr sr" data-s="77 drug recognition expert dre"><div class="cr-n">77</div><div class="cr-div"></div><div class="cr-d">Drug Recognition Expert (DRE)</div></div>
+<div class="code-cat">Service Signals</div>
+<div class="cr sr" data-s="78 school visit"><div class="cr-n">78</div><div class="cr-div"></div><div class="cr-d">School Visit</div></div>
+<div class="cr sr" data-s="79 swat assembly"><div class="cr-n">79</div><div class="cr-div"></div><div class="cr-d">SWAT Assembly</div></div>
+<div class="cr sr" data-s="81 intoxilyzer operator duty"><div class="cr-n">81</div><div class="cr-div"></div><div class="cr-d">Intoxilyzer Operator Duty</div></div>
+<div class="cr sr" data-s="82 court duty"><div class="cr-n">82</div><div class="cr-div"></div><div class="cr-d">Court Duty</div></div>
+<div class="cr sr" data-s="83 deliver"><div class="cr-n">83</div><div class="cr-div"></div><div class="cr-d">Deliver</div></div>
+<div class="cr sr" data-s="84 house check"><div class="cr-n">84</div><div class="cr-div"></div><div class="cr-d">House Check</div></div>
+<div class="cr sr" data-s="85 investigation"><div class="cr-n">85</div><div class="cr-div"></div><div class="cr-d">Investigation</div></div>
+<div class="cr sr" data-s="86 long break period"><div class="cr-n">86</div><div class="cr-div"></div><div class="cr-d">Long Break Period</div></div>
+<div class="cr sr" data-s="87 pick up"><div class="cr-n">87</div><div class="cr-div"></div><div class="cr-d">Pick Up</div></div>
+<div class="cr sr" data-s="88 personal"><div class="cr-n">88</div><div class="cr-div"></div><div class="cr-d">Personal</div></div>
+<div class="cr sr" data-s="89 refuel"><div class="cr-n">89</div><div class="cr-div"></div><div class="cr-d">Refuel</div></div>
+<div class="cr sr" data-s="90 report to headquarters"><div class="cr-n">90</div><div class="cr-div"></div><div class="cr-d">Report to Headquarters</div></div>
+<div class="cr sr" data-s="91 short break period"><div class="cr-n">91</div><div class="cr-div"></div><div class="cr-d">Short Break Period</div></div>
+<div class="cr sr" data-s="92 foot patrol"><div class="cr-n">92</div><div class="cr-div"></div><div class="cr-d">Foot Patrol</div></div>
+<div class="cr sr" data-s="93 stake out"><div class="cr-n">*93</div><div class="cr-div"></div><div class="cr-d">Stake Out</div></div>
+<div class="cr sr" data-s="94 traffic control"><div class="cr-n">*94</div><div class="cr-div"></div><div class="cr-d">Traffic Control</div></div>
+<div class="cr sr" data-s="95 traffic stop"><div class="cr-n">*95</div><div class="cr-div"></div><div class="cr-d">Traffic Stop</div></div>
+<div class="cr sr" data-s="96 building check"><div class="cr-n">*96</div><div class="cr-div"></div><div class="cr-d">Building Check</div></div>
+<div class="cr sr" data-s="97 vehicle repair maintenance"><div class="cr-n">*97</div><div class="cr-div"></div><div class="cr-d">Vehicle Repair/Maintenance</div></div>
+<div class="cr sr" data-s="98 special assignment"><div class="cr-n">*98</div><div class="cr-div"></div><div class="cr-d">Special Assignment</div></div>
+<div class="cr sr" data-s="99 drug out"><div class="cr-n">*99</div><div class="cr-div"></div><div class="cr-d">Drug Out</div></div>
+<div style="font-size:10px;color:var(--text-muted);padding:6px 0;font-style:italic">*May require a Service Number to be assigned</div>
+</div></div>
+
+<!-- 10-CODES -->
+<div class="sub-panel" id="subTencodes">
+<div class="search-bar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Search 10-codes..." oninput="filterC(this.value,'tr','sc2')"></div><div class="search-count" id="sc2"></div>
+<div class="code-grid">
+<div class="cr tr" data-s="10-1 receiving poorly"><div class="cr-n">10-1</div><div class="cr-div"></div><div class="cr-d">Receiving Poorly</div></div>
+<div class="cr tr" data-s="10-2 receiving well"><div class="cr-n">10-2</div><div class="cr-div"></div><div class="cr-d">Receiving Well</div></div>
+<div class="cr tr" data-s="10-4 message received"><div class="cr-n">10-4</div><div class="cr-div"></div><div class="cr-d">Message Received</div></div>
+<div class="cr tr" data-s="10-5 relay message"><div class="cr-n">10-5</div><div class="cr-div"></div><div class="cr-d">Relay Message</div></div>
+<div class="cr tr" data-s="10-6 busy stand by"><div class="cr-n">10-6</div><div class="cr-div"></div><div class="cr-d">Busy-Stand By</div></div>
+<div class="cr tr" data-s="10-7 out of service"><div class="cr-n">10-7</div><div class="cr-div"></div><div class="cr-d">Out of Service</div></div>
+<div class="cr tr" data-s="10-8 in service"><div class="cr-n">10-8</div><div class="cr-div"></div><div class="cr-d">In Service</div></div>
+<div class="cr tr" data-s="10-9 repeat didnt understand"><div class="cr-n">10-9</div><div class="cr-div"></div><div class="cr-d">Repeat - Didn't Understand</div></div>
+<div class="cr tr" data-s="10-12 suspect in car"><div class="cr-n">10-12</div><div class="cr-div"></div><div class="cr-d">Suspect in Car</div></div>
+<div class="cr tr" data-s="10-20 location"><div class="cr-n">10-20</div><div class="cr-div"></div><div class="cr-d">Location</div></div>
+<div class="cr tr" data-s="10-23 arrived on scene"><div class="cr-n">10-23</div><div class="cr-div"></div><div class="cr-d">Arrived on Scene</div></div>
+<div class="cr tr" data-s="10-24 completed assignment"><div class="cr-n">10-24</div><div class="cr-div"></div><div class="cr-d">Completed Assignment</div></div>
+<div class="cr tr" data-s="10-26 holding subject rush reply"><div class="cr-n">10-26</div><div class="cr-div"></div><div class="cr-d">Holding Subject - Rush Reply</div></div>
+<div class="cr tr" data-s="10-27 dl information drivers license"><div class="cr-n">10-27</div><div class="cr-div"></div><div class="cr-d">D.L. Information</div></div>
+<div class="cr tr" data-s="10-28 vehicle registration"><div class="cr-n">10-28</div><div class="cr-div"></div><div class="cr-d">Vehicle Registration</div></div>
+<div class="cr tr" data-s="10-29 check wanted stolen criminal history"><div class="cr-n">10-29</div><div class="cr-div"></div><div class="cr-d">Check for Wanted, Stolen or Criminal History</div></div>
+<div class="cr tr" data-s="10-33 emergency traffic clear channel"><div class="cr-n">10-33</div><div class="cr-div"></div><div class="cr-d">Emergency Traffic - Clear Channel</div></div>
+<div class="cr tr" data-s="10-36 time"><div class="cr-n">10-36</div><div class="cr-div"></div><div class="cr-d">Time</div></div>
+<div class="cr tr" data-s="10-51 request wrecker tow"><div class="cr-n">10-51</div><div class="cr-div"></div><div class="cr-d">Request for Wrecker</div></div>
+<div class="cr tr" data-s="10-78 request back-up unit"><div class="cr-n">10-78</div><div class="cr-div"></div><div class="cr-d">Request for Back-Up Unit</div></div>
+<div class="cr tr" data-s="10-95 prisoner in custody"><div class="cr-n">10-95</div><div class="cr-div"></div><div class="cr-d">Have Prisoner in Custody</div></div>
+<div class="cr tr" data-s="10-99 information wanted stolen criminal"><div class="cr-n">10-99</div><div class="cr-div"></div><div class="cr-d">Have Information Regarding Wanted, Stolen, or Criminal History</div></div>
+</div></div>
+
+<!-- MIRANDA -->
+<div class="sub-panel" id="subMiranda">
+<div class="miranda-card">
+<div class="miranda-header"><div class="miranda-title" id="mirandaTitle">Adult Warning</div><div class="miranda-toggle"><button class="active" onclick="toggleM('en',this)">English</button><button onclick="toggleM('es',this)">Español</button></div></div>
+<div class="miranda-body">
+<div class="miranda-text active" id="mirandaEn">
+<div class="miranda-item"><div class="miranda-num">1)</div><div>You have the right to remain silent and not make any statement at all and any statement you make may be used against you at your trial;</div></div>
+<div class="miranda-item"><div class="miranda-num">2)</div><div>Any statement you make may be used as evidence against you in court;</div></div>
+<div class="miranda-item"><div class="miranda-num">3)</div><div>You have the right to have a lawyer present to advise you prior to and during any questioning;</div></div>
+<div class="miranda-item"><div class="miranda-num">4)</div><div>If you are unable to employ a lawyer, you have the right to have a lawyer appointed to advise you prior to and during any questioning;</div></div>
+<div class="miranda-item"><div class="miranda-num">5)</div><div>You have the right to terminate the interview at any time;</div></div>
+<div class="miranda-item"><div class="miranda-num">6)</div><div>Do you understand your rights?</div></div>
+<div class="miranda-item"><div class="miranda-num">7)</div><div>Do you voluntarily waive your rights?</div></div>
+</div>
+<div class="miranda-text" id="mirandaEs">
+<div class="miranda-item"><div class="miranda-num">1)</div><div>Usted tiene el derecho de guardar silencio y no hacer una declaracion y cualquier declaracion que usted haga se puede usar contra usted en su juicio;</div></div>
+<div class="miranda-item"><div class="miranda-num">2)</div><div>Cualquier declaracion se puede usar como evidencia contra usted en corte;</div></div>
+<div class="miranda-item"><div class="miranda-num">3)</div><div>Usted tiene el derecho de tener un abogado presente para aconsejarle antes y durante cualquier entrevista;</div></div>
+<div class="miranda-item"><div class="miranda-num">4)</div><div>Si usted no puede emplear un abogado, se le asignara uno de oficio para aconsejarle antes y durante cualquier entrevista;</div></div>
+<div class="miranda-item"><div class="miranda-num">5)</div><div>Usted tiene el derecho de terminar la entrevista en cualquier momento;</div></div>
+<div class="miranda-item"><div class="miranda-num">6)</div><div>Usted entiende sus derechos?</div></div>
+<div class="miranda-item"><div class="miranda-num">7)</div><div>Usted renuncia a sus derechos voluntariamente?</div></div>
+</div>
+</div>
+<div class="miranda-footer" id="mirandaFooter">The officer who takes the statement must give the accused the warning. The accused must then knowingly, intelligently and voluntarily waive his right to counsel and his right to remain silent. silence on an accused is not a WAIVER. Failure to comply will void the statement. The warning and waiver must appear on the face of the written statement.</div>
+</div></div>
+
+<!-- CAD -->
+<div class="sub-panel" id="subCad">
+<div class="search-bar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Search CAD codes..." oninput="filterC(this.value,'cd','sc3')"></div><div class="search-count" id="sc3"></div>
+<div class="code-cat">Cleared / Disposition</div>
+<div class="cad-grid">
+<div class="cad-row cd" data-s="nr cleared service signal"><div class="cad-code">NR</div><div class="cad-desc">Cleared Service Signal</div></div>
+<div class="cad-row cd" data-s="00 cleared traffic stop"><div class="cad-code">00</div><div class="cad-desc">Cleared Traffic Stop</div></div>
+<div class="cad-row cd" data-s="01 offense report"><div class="cad-code">01</div><div class="cad-desc">Offense Report</div></div>
+<div class="cad-row cd" data-s="02 call comments only"><div class="cad-code">02</div><div class="cad-desc">Call Comments Only</div></div>
+<div class="cad-row cd" data-s="03 information accident report"><div class="cad-code">03</div><div class="cad-desc">Information / Accident Report</div></div>
+<div class="cad-row cd" data-s="04 arrest report"><div class="cad-code">04</div><div class="cad-desc">Arrest Report</div></div>
+<div class="cad-row cd" data-s="05 misc related report alarms fi"><div class="cad-code">05</div><div class="cad-desc">Misc. Related Report (Misc. alarms, FI cards)</div></div>
+<div class="cad-row cd" data-s="06 referred"><div class="cad-code">06</div><div class="cad-desc">Referred</div></div>
+<div class="cad-row cd" data-s="07 unable to locate"><div class="cad-code">07</div><div class="cad-desc">Unable to Locate</div></div>
+<div class="cad-row cd" data-s="08 unfounded"><div class="cad-code">08</div><div class="cad-desc">Unfounded</div></div>
+<div class="cad-row cd" data-s="99 cancel duplicate"><div class="cad-code">99</div><div class="cad-desc">Cancel/Duplicate</div></div>
+</div>
+<div class="code-cat">Alarm Codes</div>
+<div class="cad-grid">
+<div class="cad-row cd" data-s="a1 alarm bldg secure unknown"><div class="cad-code">A1</div><div class="cad-desc">ALARM - Bldg. Secure - Unknown Cause</div></div>
+<div class="cad-row cd" data-s="a2 alarm bldg secure comment"><div class="cad-code">A2</div><div class="cad-desc">ALARM - Bldg. Secure - Comment</div></div>
+<div class="cad-row cd" data-s="a3 alarm bldg secure weather"><div class="cad-code">A3</div><div class="cad-desc">ALARM - Bldg. Secure - Weather</div></div>
+</div>
+<div class="code-cat">Assignment Codes</div>
+<div class="cad-grid">
+<div class="cad-row cd" data-s="b1 bicycle no activity no comment"><div class="cad-code">B1</div><div class="cad-desc">BICYCLE ASSIGNMENT - No Activity - No Comment</div></div>
+<div class="cad-row cd" data-s="b2 bicycle activity comment"><div class="cad-code">B2</div><div class="cad-desc">BICYCLE ASSIGNMENT - Activity - Comment</div></div>
+<div class="cad-row cd" data-s="c1 canine deployment no action"><div class="cad-code">C1</div><div class="cad-desc">CANINE DEPLOYMENT - No action</div></div>
+<div class="cad-row cd" data-s="c2 canine person object located apprehended"><div class="cad-code">C2</div><div class="cad-desc">CANINE DEPLOYMENT - Person/object located or apprehended</div></div>
+<div class="cad-row cd" data-s="c3 canine person apprehended force"><div class="cad-code">C3</div><div class="cad-desc">CANINE DEPLOYMENT - Person apprehended - force used</div></div>
+<div class="cad-row cd" data-s="tc telecommunicator"><div class="cad-code">TC</div><div class="cad-desc">Telecommunicator</div></div>
+</div>
+<div class="code-cat">Personal Class Codes</div>
+<div class="cad-grid">
+<div class="cad-row cd" data-s="6a class airborne disease"><div class="cad-code">6A</div><div class="cad-desc">Airborne Disease</div></div>
+<div class="cad-row cd" data-s="6b class body fluid disease"><div class="cad-code">6B</div><div class="cad-desc">Body Fluid Disease</div></div>
+</div>
+</div>
+
+<!-- ALPHA -->
+<div class="sub-panel" id="subAlpha">
+<div class="alpha-grid">
+<div class="alpha-item"><div class="alpha-letter">A</div><div class="alpha-word">Adam</div></div>
+<div class="alpha-item"><div class="alpha-letter">B</div><div class="alpha-word">Boy</div></div>
+<div class="alpha-item"><div class="alpha-letter">C</div><div class="alpha-word">Charles</div></div>
+<div class="alpha-item"><div class="alpha-letter">D</div><div class="alpha-word">David</div></div>
+<div class="alpha-item"><div class="alpha-letter">E</div><div class="alpha-word">Edward</div></div>
+<div class="alpha-item"><div class="alpha-letter">F</div><div class="alpha-word">Frank</div></div>
+<div class="alpha-item"><div class="alpha-letter">G</div><div class="alpha-word">George</div></div>
+<div class="alpha-item"><div class="alpha-letter">H</div><div class="alpha-word">Henry</div></div>
+<div class="alpha-item"><div class="alpha-letter">I</div><div class="alpha-word">Ida</div></div>
+<div class="alpha-item"><div class="alpha-letter">J</div><div class="alpha-word">John</div></div>
+<div class="alpha-item"><div class="alpha-letter">K</div><div class="alpha-word">King</div></div>
+<div class="alpha-item"><div class="alpha-letter">L</div><div class="alpha-word">Lincoln</div></div>
+<div class="alpha-item"><div class="alpha-letter">M</div><div class="alpha-word">Mary</div></div>
+<div class="alpha-item"><div class="alpha-letter">N</div><div class="alpha-word">Nora</div></div>
+<div class="alpha-item"><div class="alpha-letter">O</div><div class="alpha-word">Ocean</div></div>
+<div class="alpha-item"><div class="alpha-letter">P</div><div class="alpha-word">Paul</div></div>
+<div class="alpha-item"><div class="alpha-letter">Q</div><div class="alpha-word">Queen</div></div>
+<div class="alpha-item"><div class="alpha-letter">R</div><div class="alpha-word">Robert</div></div>
+<div class="alpha-item"><div class="alpha-letter">S</div><div class="alpha-word">Sam</div></div>
+<div class="alpha-item"><div class="alpha-letter">T</div><div class="alpha-word">Tom</div></div>
+<div class="alpha-item"><div class="alpha-letter">U</div><div class="alpha-word">Union</div></div>
+<div class="alpha-item"><div class="alpha-letter">V</div><div class="alpha-word">Victor</div></div>
+<div class="alpha-item"><div class="alpha-letter">W</div><div class="alpha-word">William</div></div>
+<div class="alpha-item"><div class="alpha-letter">X</div><div class="alpha-word">X-Ray</div></div>
+<div class="alpha-item"><div class="alpha-letter">Y</div><div class="alpha-word">Young</div></div>
+<div class="alpha-item"><div class="alpha-letter">Z</div><div class="alpha-word">Zebra</div></div>
+</div></div>
+
+</div><!-- end resources panel -->
+</div><!-- end container -->
+<div id="site-footer" data-style="simple"></div>
+</div><!-- end training-content -->
+
+<script>
+const PASSCODE='chief761';const ls=document.getElementById('lockScreen');const tc=document.getElementById('trainingContent');const pi=document.getElementById('passcodeInput');const ub=document.getElementById('unlockBtn');const le=document.getElementById('lockError');
+function unlock(){const v=pi.value.trim().toLowerCase();if(v===PASSCODE){ls.style.display='none';tc.classList.add('unlocked');le.classList.remove('show');sessionStorage.setItem('rpd761_auth','true')}else{le.classList.add('show');pi.value='';pi.focus()}}
+ub.addEventListener('click',unlock);pi.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();le.classList.remove('show')});
+if(sessionStorage.getItem('rpd761_auth')==='true'){ls.style.display='none';tc.classList.add('unlocked')}
+
+function switchTab(t){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));const m={schedule:0,resources:1};document.querySelectorAll('.tab-btn')[m[t]].classList.add('active');const p={schedule:'panelSchedule',resources:'panelResources'};document.getElementById(p[t]).classList.add('active')}
+
+function showSub(id){document.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.sub-panel').forEach(p=>p.classList.remove('active'));const m={signals:0,tencodes:1,miranda:2,cad:3,alpha:4};const p={signals:'subSignals',tencodes:'subTencodes',miranda:'subMiranda',cad:'subCad',alpha:'subAlpha'};document.querySelectorAll('.sub-tab')[m[id]].classList.add('active');document.getElementById(p[id]).classList.add('active')}
+
+function filterC(q,cls,cid){const s=q.toLowerCase().trim();const rows=document.querySelectorAll('.'+cls);let n=0;rows.forEach(r=>{const m=!s||r.dataset.s.includes(s);r.classList.toggle('hidden',!m);if(m)n++});const el=document.getElementById(cid);el.textContent=s?n+' of '+rows.length+' results':''}
+
+function toggleM(lang,btn){document.querySelectorAll('.miranda-toggle button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.getElementById('mirandaEn').classList.toggle('active',lang==='en');document.getElementById('mirandaEs').classList.toggle('active',lang==='es');document.getElementById('mirandaTitle').textContent=lang==='en'?'Adult Warning':'Aviso De Adulto';document.getElementById('mirandaFooter').style.display=lang==='en'?'block':'none'}
+
+// Schedule: mark past/today
+const today=new Date();today.setHours(0,0,0,0);
+document.querySelectorAll('[data-date]').forEach(el=>{const d=new Date(el.dataset.date+'T12:00:00');const diff=d-today;if(diff<0)el.classList.add('is-past');else if(diff<864e5){el.classList.add('is-today');const t=el.querySelector('.ev-topic')||el.querySelector('.feat-title');if(t){const dot=document.createElement('span');dot.style.cssText='width:6px;height:6px;border-radius:50%;background:#c0392b;animation:pulse 2s ease infinite;margin-left:8px;display:inline-block';t.appendChild(dot)}}});
+const shakeS=document.createElement('style');shakeS.textContent='@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}@keyframes shake{0%,100%{transform:translateX(0)}15%{transform:translateX(-8px)}30%{transform:translateX(8px)}45%{transform:translateX(-6px)}60%{transform:translateX(6px)}75%{transform:translateX(-3px)}90%{transform:translateX(3px)}}';document.head.appendChild(shakeS);
+
+// Month nav scroll highlight
+const sects=document.querySelectorAll('.month-section');const navs=document.querySelectorAll('.month-jump');
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){navs.forEach(l=>l.classList.remove('active'));const a=document.querySelector('.month-jump[href="#'+e.target.id+'"]');if(a)a.classList.add('active')}})},{threshold:0.3,rootMargin:'-100px 0px -60% 0px'});
+sects.forEach(s=>obs.observe(s));
+document.querySelectorAll('.month-jump').forEach(l=>{l.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(l.getAttribute('href'));const y=t.getBoundingClientRect().top+window.pageYOffset-90;window.scrollTo({top:y,behavior:'smooth'})})});
+</script>
+<script src="shared.js"></script>
+</body>
+</html>
