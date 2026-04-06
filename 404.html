@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Page Not Found | RPD Cadets</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#1a2744;--navy-deep:#0f1a30;--red:#c0392b;--gold:#d4a952;--white:#fff;--text-muted:#8899b0}
+body{font-family:'Barlow',sans-serif;background:var(--navy-deep);color:var(--white);-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+.error-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 24px;position:relative}
+.error-bg{position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(26,39,68,0.95) 0%,rgba(15,26,48,1) 70%);z-index:0}
+.error-bg::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);background-size:60px 60px}
+.error-card{position:relative;z-index:1;text-align:center;max-width:500px}
+.error-code{font-family:'Bebas Neue',sans-serif;font-size:clamp(100px,20vw,180px);letter-spacing:8px;line-height:1;color:rgba(255,255,255,0.04);position:relative}
+.error-code::after{content:'404';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--red),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.error-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;background:rgba(192,57,43,0.1);border:1px solid rgba(192,57,43,0.2);border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:24px}
+.error-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.error-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;margin-bottom:12px}
+.error-desc{font-size:15px;color:var(--text-muted);font-weight:300;line-height:1.7;margin-bottom:36px}
+.error-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--red);color:var(--white);text-decoration:none;border-radius:10px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;transition:all .3s;box-shadow:0 4px 20px rgba(192,57,43,0.3)}
+.btn-primary:hover{background:#e74c3c;transform:translateY(-2px);box-shadow:0 8px 30px rgba(192,57,43,0.4)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--white);text-decoration:none;border-radius:10px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;transition:all .3s}
+.btn-secondary:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);transform:translateY(-2px)}
+.error-footer{position:relative;z-index:1;text-align:center;padding:24px;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.15)}
+</style>
+</head>
+<body>
+<div class="error-wrap">
+<div class="error-bg"></div>
+<div class="error-card">
+<div class="error-code">404</div>
+<div class="error-badge"><span class="dot"></span>Signal Not Found</div>
+<h1 class="error-title">Page Not Found</h1>
+<p class="error-desc">The page you're looking for doesn't exist or has been moved. Let's get you back on patrol.</p>
+<div class="error-actions">
+<a href="index.html" class="btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Go Home</a>
+<a href="contact.html" class="btn-secondary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Contact Us</a>
+</div>
+</div>
+</div>
+<div class="error-footer">Richardson Police Public Safety Cadets — Unit #761</div>
+</body>
+</html>
