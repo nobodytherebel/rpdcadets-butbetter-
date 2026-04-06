@@ -518,7 +518,10 @@ fetch(sheetCSV)
     let html = '';
 
     rows.forEach(r => {
-      const [month, date, day, eventType, title, startTime, endTime, notes] = r;
+      // Remove surrounding quotes from each cell
+      const clean = r.map(cell => cell.replace(/^"|"$/g, ''));
+
+      const [month, date, day, eventType, title, startTime, endTime, notes] = clean;
 
       // Choose a class for the tag based on Event Type
       let tagClass = '';
