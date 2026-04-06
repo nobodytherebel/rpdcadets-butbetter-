@@ -517,16 +517,29 @@ fetch(sheetCSV)
 
     let html = '';
     let currentMonth = '';
+    let monthSection = '';
 
     rows.forEach(r => {
       // Remove surrounding quotes from each cell
       const clean = r.map(cell => cell.replace(/^"|"$/g, ''));
-
       const [month, date, day, eventType, title, startTime, endTime, notes] = clean;
 
-      // Add month header if this row is a new month
+      // If month changes, close previous month-section and start new one
       if (month !== currentMonth) {
-        html += `<div class="month-header"><h2>${month}</h2></div>`;
+        if (currentMonth !== '') {
+          // Close previous month-section
+          html += monthSection + '</div>';
+        }
+
+        // Start new month-section
+        // Use lowercase 3-letter month for ID (apr, may, jun, etc.)
+        const monthId = month.slice(0,3).toLowerCase();
+        monthSection = `<div class="month-section" id="${monthId}">
+          <div class="month-header">
+            <span class="month-name">${month}</span>
+            <div class="month-line"></div>
+            <span class="month-year">2026</span>
+          </div>`;
         currentMonth = month;
       }
 
@@ -550,7 +563,7 @@ fetch(sheetCSV)
           tagClass = 't';
       }
 
-      html += `<div class="ev ${tagClass}" data-date="${month}-${date}-${day}">
+      monthSection += `<div class="ev ${tagClass}" data-date="${month}-${date}-${day}">
         <div class="ev-d">
           <div class="ev-day">${date}</div>
           <div class="ev-dow">${day}</div>
@@ -564,24 +577,16 @@ fetch(sheetCSV)
       </div>`;
     });
 
+    // Close last month-section
+    if (monthSection !== '') {
+      html += monthSection + '</div>';
+    }
+
     document.getElementById("calendar").innerHTML = html;
   })
   .catch(err => {
     document.getElementById("calendar").innerHTML = `<p>Error loading schedule: ${err}</p>`;
   });
 </script>
-
-<style>
-.month-header {
-  margin-top: 30px;
-  margin-bottom: 10px;
-}
-.month-header h2 {
-  font-size: 1.5em;
-  color: #222;
-  border-bottom: 2px solid #444;
-  padding-bottom: 3px;
-}
-</style>
 </body>
 </html>
