@@ -520,19 +520,15 @@ fetch(sheetCSV)
     let monthSection = '';
 
     rows.forEach(r => {
-      // Remove surrounding quotes from each cell
       const clean = r.map(cell => cell.replace(/^"|"$/g, ''));
       const [month, date, day, eventType, title, startTime, endTime, notes] = clean;
 
-      // If month changes, close previous month-section and start new one
+      // New month section
       if (month !== currentMonth) {
         if (currentMonth !== '') {
-          // Close previous month-section
           html += monthSection + '</div>';
         }
 
-        // Start new month-section
-        // Use lowercase 3-letter month for ID (apr, may, jun, etc.)
         const monthId = month.slice(0,3).toLowerCase();
         monthSection = `<div class="month-section" id="${monthId}">
           <div class="month-header">
@@ -540,44 +536,53 @@ fetch(sheetCSV)
             <div class="month-line"></div>
             <span class="month-year">2026</span>
           </div>`;
+
         currentMonth = month;
       }
 
-      // Choose a class for the tag based on Event Type
-      let tagClass = '';
-      switch(eventType.toLowerCase()) {
-        case 'training':
-          tagClass = 't';
-          break;
-        case 'special':
-        case 'special event':
-          tagClass = 's';
-          break;
-        case 'competition':
-          tagClass = 'c';
-          break;
-        case 'no meeting':
-          tagClass = 'o';
-          break;
-        default:
-          tagClass = 't';
+      // Normalize event type
+      const type = eventType.toLowerCase();
+
+      let tagClass = 't';
+      if (type.includes('special')) tagClass = 's';
+      else if (type.includes('competition')) tagClass = 'c';
+      else if (type.includes('no meeting')) tagClass = 'o';
+
+      // 👉 FEATURED EVENTS (Special + Competition)
+      if (type.includes('special') || type.includes('competition')) {
+
+        monthSection += `<div class="ev-feat ${tagClass}" data-date="2026-${String(new Date(month + " 1").getMonth()+1).padStart(2,'0')}-${String(date).padStart(2,'0')}">
+          <div class="feat-top">
+            <div class="feat-date">
+              <span class="feat-mo">${month}</span>
+              <span class="feat-day">${date}</span>
+              <span class="feat-dow">${day}</span>
+            </div>
+            <span class="ev-tag tag-${tagClass}">${eventType}</span>
+          </div>
+          <div class="feat-title">${title}</div>
+          <div class="feat-desc">${notes || ''}</div>
+        </div>`;
+
+      } else {
+        // 👉 NORMAL EVENTS (Training, etc.)
+        monthSection += `<div class="ev ${tagClass}" data-date="${month}-${date}-${day}">
+          <div class="ev-d">
+            <div class="ev-day">${date}</div>
+            <div class="ev-dow">${day}</div>
+          </div>
+          <div class="ev-div"></div>
+          <div class="ev-i">
+            <div class="ev-topic">${title}</div>
+            <div class="ev-time">${startTime} – ${endTime}</div>
+          </div>
+          <span class="ev-tag tag-${tagClass}">${eventType}</span>
+        </div>`;
       }
 
-      monthSection += `<div class="ev ${tagClass}" data-date="${month}-${date}-${day}">
-        <div class="ev-d">
-          <div class="ev-day">${date}</div>
-          <div class="ev-dow">${day}</div>
-        </div>
-        <div class="ev-div"></div>
-        <div class="ev-i">
-          <div class="ev-topic">${title}</div>
-          <div class="ev-time">${startTime} – ${endTime}</div>
-        </div>
-        <span class="ev-tag tag-${tagClass}">${eventType}</span>
-      </div>`;
     });
 
-    // Close last month-section
+    // Close last month
     if (monthSection !== '') {
       html += monthSection + '</div>';
     }
