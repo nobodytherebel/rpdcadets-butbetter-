@@ -510,21 +510,47 @@ document.querySelectorAll('.month-jump').forEach(l=>{l.addEventListener('click',
 const sheetCSV = "https://docs.google.com/spreadsheets/d/1qRTpPMuiz2sTzXdcTpvmT7vJ8P4DWg-9maSlNnl3rTI/gviz/tq?tqx=out:csv&sheet=calendar";
 
 fetch(sheetCSV)
-  .then(r => r.text())
-  .then(text => {
-    const rows = text.trim().split("\n").map(r => r.split(","));
-    // Remove header row from CSV
-    rows.shift();
+  .then(response => response.text())
+  .then(csvText => {
+    const rows = csvText.trim().split("\n").map(r => r.split(","));
+    rows.shift(); // remove header row
 
-    // Build the HTML exactly like your current table
     let html = '';
+
     rows.forEach(r => {
-      html += `<div class="schedule-entry">
-        <h3>${r[4]}</h3>
-        <p><strong>Month:</strong> ${r[0]} | <strong>Date:</strong> ${r[1]} | <strong>Day:</strong> ${r[2]}</p>
-        <p><strong>Event Type:</strong> ${r[3]}</p>
-        <p><strong>Time:</strong> ${r[5]} – ${r[6]}</p>
-        <p><strong>Notes:</strong> ${r[7]}</p>
+      const [month, date, day, eventType, title, startTime, endTime, notes] = r;
+
+      // Choose a class for the tag based on Event Type
+      let tagClass = '';
+      switch(eventType.toLowerCase()) {
+        case 'training':
+          tagClass = 'tag-t';
+          break;
+        case 'special':
+        case 'special event':
+          tagClass = 'tag-s';
+          break;
+        case 'competition':
+          tagClass = 'tag-c';
+          break;
+        case 'no meeting':
+          tagClass = 'tag-n';
+          break;
+        default:
+          tagClass = 'tag-o';
+      }
+
+      html += `<div class="ev t" data-date="${month}-${date}-${day}">
+        <div class="ev-d">
+          <div class="ev-day">${date}</div>
+          <div class="ev-dow">${day}</div>
+        </div>
+        <div class="ev-div"></div>
+        <div class="ev-i">
+          <div class="ev-topic">${title}</div>
+          <div class="ev-time">${startTime} – ${endTime}</div>
+        </div>
+        <span class="ev-tag ${tagClass}">${eventType}</span>
       </div>`;
     });
 
