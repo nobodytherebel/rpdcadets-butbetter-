@@ -527,23 +527,23 @@ fetch(sheetCSV)
       let tagClass = '';
       switch(eventType.toLowerCase()) {
         case 'training':
-          tagClass = 'tag-t';
+          tagClass = 't';
           break;
         case 'special':
         case 'special event':
-          tagClass = 'tag-s';
+          tagClass = 's';
           break;
         case 'competition':
-          tagClass = 'tag-c';
+          tagClass = 'c';
           break;
         case 'no meeting':
-          tagClass = 'tag-o';
+          tagClass = 'o';
           break;
         default:
-          tagClass = 'tag-t';
+          tagClass = 't';
       }
 
-      html += `<div class="ev t" data-date="${month}-${date}-${day}">
+      html += `<div class="ev ${tagClass}" data-date="${month}-${date}-${day}">
         <div class="ev-d">
           <div class="ev-day">${date}</div>
           <div class="ev-dow">${day}</div>
@@ -553,7 +553,7 @@ fetch(sheetCSV)
           <div class="ev-topic">${title}</div>
           <div class="ev-time">${startTime} – ${endTime}</div>
         </div>
-        <span class="ev-tag  ${tagClass}">${eventType}</span>
+        <span class="ev-tag  tag-${tagClass}">${eventType}</span>
       </div>`;
     });
 
