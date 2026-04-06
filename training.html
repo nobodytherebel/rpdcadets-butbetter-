@@ -506,7 +506,7 @@ sects.forEach(s=>obs.observe(s));
 document.querySelectorAll('.month-jump').forEach(l=>{l.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(l.getAttribute('href'));const y=t.getBoundingClientRect().top+window.pageYOffset-90;window.scrollTo({top:y,behavior:'smooth'})})});
 </script>
 <script src="shared.js"></script>
-  <script>
+<script>
 const sheetCSV = "https://docs.google.com/spreadsheets/d/1qRTpPMuiz2sTzXdcTpvmT7vJ8P4DWg-9maSlNnl3rTI/gviz/tq?tqx=out:csv&sheet=calendar";
 
 fetch(sheetCSV)
@@ -516,12 +516,19 @@ fetch(sheetCSV)
     rows.shift(); // remove header row
 
     let html = '';
+    let currentMonth = '';
 
     rows.forEach(r => {
       // Remove surrounding quotes from each cell
       const clean = r.map(cell => cell.replace(/^"|"$/g, ''));
 
       const [month, date, day, eventType, title, startTime, endTime, notes] = clean;
+
+      // Add month header if this row is a new month
+      if (month !== currentMonth) {
+        html += `<div class="month-header"><h2>${month}</h2></div>`;
+        currentMonth = month;
+      }
 
       // Choose a class for the tag based on Event Type
       let tagClass = '';
@@ -553,7 +560,7 @@ fetch(sheetCSV)
           <div class="ev-topic">${title}</div>
           <div class="ev-time">${startTime} – ${endTime}</div>
         </div>
-        <span class="ev-tag  tag-${tagClass}">${eventType}</span>
+        <span class="ev-tag tag-${tagClass}">${eventType}</span>
       </div>`;
     });
 
@@ -563,5 +570,18 @@ fetch(sheetCSV)
     document.getElementById("calendar").innerHTML = `<p>Error loading schedule: ${err}</p>`;
   });
 </script>
+
+<style>
+.month-header {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+.month-header h2 {
+  font-size: 1.5em;
+  color: #222;
+  border-bottom: 2px solid #444;
+  padding-bottom: 3px;
+}
+</style>
 </body>
 </html>
