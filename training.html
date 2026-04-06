@@ -537,10 +537,10 @@ fetch(sheetCSV)
           tagClass = 'tag-c';
           break;
         case 'no meeting':
-          tagClass = 'tag-n';
+          tagClass = 'tag-o';
           break;
         default:
-          tagClass = 'tag-o';
+          tagClass = 'tag-t';
       }
 
       html += `<div class="ev t" data-date="${month}-${date}-${day}">
@@ -553,7 +553,7 @@ fetch(sheetCSV)
           <div class="ev-topic">${title}</div>
           <div class="ev-time">${startTime} – ${endTime}</div>
         </div>
-        <span class="ev-tag ${tagClass}">${eventType}</span>
+        <span class="ev-tag  ${tagClass}">${eventType}</span>
       </div>`;
     });
 
