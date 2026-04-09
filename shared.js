@@ -1,11 +1,19 @@
- // ─────────────────────────────
-// 🔥 Firebase Setup (TOP OF FILE)
+// ─────────────────────────────
+// 🔥 Firebase Imports
 // ─────────────────────────────
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+import { 
+  getAuth, 
+  onAuthStateChanged, 
+  signInWithPopup, 
+  GoogleAuthProvider, 
+  signOut 
+} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 
-// Your config
+// ─────────────────────────────
+// 🔥 Firebase Config
+// ─────────────────────────────
 const firebaseConfig = {
   apiKey: "AIzaSyDm3oPI6qBNJWQErlTPD6RY6tnrXrJGby4",
   authDomain: "test-e0036.firebaseapp.com",
@@ -17,10 +25,13 @@ const firebaseConfig = {
   measurementId: "G-W4WFVBFFG7"
 };
 
-// Initialize Firebase
+// ─────────────────────────────
+// 🔥 Initialize Firebase
+// ─────────────────────────────
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
 // ─────────────────────────────
 // 🌐 Site Config
@@ -45,27 +56,60 @@ const NAV_LINKS = [
 ];
 
 // ─────────────────────────────
-// 👤 Auth State (LOGIN DISPLAY)
+// 🔐 Auth Buttons Setup
+// ─────────────────────────────
+function setupAuthButtons() {
+  const loginBtn = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  if (loginBtn) {
+    loginBtn.addEventListener("click", () => {
+      signInWithPopup(auth, provider)
+        .catch(err => console.error("Login error:", err));
+    });
+  }
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      signOut(auth);
+    });
+  }
+}
+
+// ─────────────────────────────
+// 👤 Auth State Listener
 // ─────────────────────────────
 onAuthStateChanged(auth, (user) => {
+  const loginBtn = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
   const userEl = document.getElementById("user");
-  if (!userEl) return;
 
   if (user) {
-    userEl.textContent = `Logged in as ${user.email}`;
+    if (loginBtn) loginBtn.style.display = "none";
+    if (logoutBtn) logoutBtn.style.display = "inline-block";
+
+    if (userEl) {
+      userEl.textContent = `Logged in as ${user.email}`;
+    }
   } else {
-    userEl.textContent = "Not logged in";
+    if (loginBtn) loginBtn.style.display = "inline-block";
+    if (logoutBtn) logoutBtn.style.display = "none";
+
+    if (userEl) {
+      userEl.textContent = "Not logged in";
+    }
   }
 });
 
-// ─── Determine active page ───
+// ─────────────────────────────
+// 🌐 Navigation Builder
+// ─────────────────────────────
 function getActivePage() {
   const path = window.location.pathname;
   const file = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
   return file;
 }
 
-// ─── Build Nav HTML ───
 function buildNav() {
   const active = getActivePage();
 
@@ -90,12 +134,21 @@ function buildNav() {
               <span class="nav-brand-unit">${SITE.unit}</span>
             </div>
           </a>
-          <ul class="nav-links">${linksHTML}</ul>
+
+          <ul class="nav-links">
+            ${linksHTML}
+            <li id="auth-area">
+              <button id="loginBtn">Login</button>
+              <button id="logoutBtn" style="display:none;">Logout</button>
+            </li>
+          </ul>
+
           <button class="hamburger" id="hamburger" aria-label="Toggle menu">
             <span></span><span></span><span></span>
           </button>
         </div>
       </nav>
+
       <div class="mobile-menu" id="mobileMenu">${mobileLinksHTML}</div>
     `;
 
@@ -105,7 +158,7 @@ function buildNav() {
       navbar.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // Mobile menu toggle
+    // Mobile menu
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
 
@@ -118,14 +171,25 @@ function buildNav() {
         mobileMenu.classList.remove('open');
       });
     });
+
+    // 🔥 IMPORTANT: setup auth AFTER nav exists
+    setupAuthButtons();
   }
 }
 
-// Run nav after page loads
+// ─────────────────────────────
+// 🚀 Run App
+// ─────────────────────────────
 buildNav();
 
-// Run nav after page loads
-buildNav();
+
+
+
+
+
+
+
+
 // ─── Build Footer HTML ───
 function buildFooter() {
   const footerEl = document.getElementById('site-footer');
