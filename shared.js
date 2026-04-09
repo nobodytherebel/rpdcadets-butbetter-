@@ -82,21 +82,23 @@ function setupAuthButtons() {
 onAuthStateChanged(auth, (user) => {
   const loginBtn = document.getElementById("loginBtn");
   const logoutBtn = document.getElementById("logoutBtn");
-  const userEl = document.getElementById("user");
+  const userEmail = document.getElementById("userEmail");
 
   if (user) {
     if (loginBtn) loginBtn.style.display = "none";
     if (logoutBtn) logoutBtn.style.display = "inline-block";
 
-    if (userEl) {
-      userEl.textContent = `Logged in as ${user.email}`;
+    if (userEmail) {
+      userEmail.style.display = "inline-block";
+      userEmail.textContent = user.email;
     }
   } else {
     if (loginBtn) loginBtn.style.display = "inline-block";
     if (logoutBtn) logoutBtn.style.display = "none";
 
-    if (userEl) {
-      userEl.textContent = "Not logged in";
+    if (userEmail) {
+      userEmail.style.display = "none";
+      userEmail.textContent = "";
     }
   }
 });
@@ -138,6 +140,7 @@ function buildNav() {
           <ul class="nav-links">
             ${linksHTML}
             <li id="auth-area">
+              <span id="userEmail" style="display:none; margin-right:10px;"></span>
               <button id="loginBtn">Login</button>
               <button id="logoutBtn" style="display:none;">Logout</button>
             </li>
@@ -172,7 +175,7 @@ function buildNav() {
       });
     });
 
-    // 🔥 IMPORTANT: setup auth AFTER nav exists
+    // 🔥 Setup auth AFTER nav is built
     setupAuthButtons();
   }
 }
