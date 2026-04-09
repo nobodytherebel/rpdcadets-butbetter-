@@ -24,6 +24,33 @@
 // ═══════ RPD CADETS — SHARED NAV & FOOTER ═══════
 // Edit this ONE file to update nav links, footer, and site info across all pages.
 
+// ─────────────────────────────
+// 🔥 Firebase Setup (TOP OF FILE)
+// ─────────────────────────────
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+
+// Your config
+const firebaseConfig = {
+  apiKey: "AIzaSyDm3oPI6qBNJWQErlTPD6RY6tnrXrJGby4",
+  authDomain: "test-e0036.firebaseapp.com",
+  databaseURL: "https://test-e0036-default-rtdb.firebaseio.com",
+  projectId: "test-e0036",
+  storageBucket: "test-e0036.firebasestorage.app",
+  messagingSenderId: "1068764877683",
+  appId: "1:1068764877683:web:174fd0dd6dc87fd960ab06",
+  measurementId: "G-W4WFVBFFG7"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app);
+
+// ─────────────────────────────
+// 🌐 Site Config
+// ─────────────────────────────
 const SITE = {
   name: 'Richardson Police',
   unit: 'Public Safety Cadets — Unit #761',
@@ -41,10 +68,22 @@ const NAV_LINKS = [
   { label: 'Trackers', href: 'trackers.html' },
   { label: 'FAQ', href: 'faq.html' },
   { label: 'Contact', href: 'contact.html' },
-
 ];
 
-<p id="user">Not logged in</p>
+// ─────────────────────────────
+// 👤 Auth State (LOGIN DISPLAY)
+// ─────────────────────────────
+onAuthStateChanged(auth, (user) => {
+  const userEl = document.getElementById("user");
+  if (!userEl) return;
+
+  if (user) {
+    userEl.textContent = `Logged in as ${user.email}`;
+  } else {
+    userEl.textContent = "Not logged in";
+  }
+});
+
 // ─── Determine active page ───
 function getActivePage() {
   const path = window.location.pathname;
@@ -55,14 +94,17 @@ function getActivePage() {
 // ─── Build Nav HTML ───
 function buildNav() {
   const active = getActivePage();
+
   const linksHTML = NAV_LINKS.map(l =>
     `<li><a href="${l.href}"${l.href === active ? ' class="active"' : ''}>${l.label}</a></li>`
   ).join('');
+
   const mobileLinksHTML = NAV_LINKS.map(l =>
     `<a href="${l.href}">${l.label}</a>`
   ).join('');
 
   const navEl = document.getElementById('site-nav');
+
   if (navEl) {
     navEl.innerHTML = `
       <nav id="navbar">
@@ -75,7 +117,9 @@ function buildNav() {
             </div>
           </a>
           <ul class="nav-links">${linksHTML}</ul>
-          <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+          <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
         </div>
       </nav>
       <div class="mobile-menu" id="mobileMenu">${mobileLinksHTML}</div>
@@ -90,13 +134,21 @@ function buildNav() {
     // Mobile menu toggle
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
     document.querySelectorAll('.mobile-menu a').forEach(link => {
-      link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+      });
     });
   }
 }
 
+// Run nav after page loads
+buildNav();
 // ─── Build Footer HTML ───
 function buildFooter() {
   const footerEl = document.getElementById('site-footer');
